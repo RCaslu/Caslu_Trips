@@ -1,9 +1,9 @@
-import Trips from "./about/components/Trips";
+
 
 export default function Home() {
   return (
     <div>
-      <Trips />
+      <h1>Hello start</h1>
     </div>
   );
 }
