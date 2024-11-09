@@ -22,6 +22,7 @@ const config: Config = {
         textColor: {
             dark: '#717171',
             primary: '#590BD8',
+            primaryDarker: '#312A4F',
         },
     },
     plugins: [],
