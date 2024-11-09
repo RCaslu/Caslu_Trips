@@ -6,7 +6,6 @@ import DatePicker from '@/components/datePicker';
 import CurrencyInput from '@/components/currencyInput';
 import Button from '@/components/Button';
 
-
 const TripSearch = () => {
     return (
         <div className="container mx-auto p-5 bg-search-background bg-no-repeat bg-cover bg-center">
