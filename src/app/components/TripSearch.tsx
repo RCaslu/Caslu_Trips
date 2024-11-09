@@ -9,7 +9,7 @@ import Button from '@/components/Button';
 
 const TripSearch = () => {
     return (
-        <div className="container mx-auto p-5">
+        <div className="container mx-auto p-5 bg-search-background bg-no-repeat bg-cover bg-center">
             <h1 className="text-center font-semibold text-2xl text-primaryDarker">
                 Encontre Sua Próxima{' '}
                 <span className="text-primary">Viagem!</span>
