@@ -4,23 +4,26 @@ import React from 'react';
 import Image from 'next/image';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { AiOutlineMenu } from 'react-icons/ai';
+import Link from 'next/link';
 
 const Header = () => {
-    const [ menuIsOpen, setMenuIsOpen ] = React.useState(false);
+    const [menuIsOpen, setMenuIsOpen] = React.useState(false);
 
     const { status, data } = useSession();
 
     const handleLoginClick = () => signIn();
 
-    const handleLogoutClick = () => [signOut()
-        .then(() => setMenuIsOpen(false))
-    ]
+    const handleLogoutClick = () => [
+        signOut().then(() => setMenuIsOpen(false)),
+    ];
 
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
     return (
         <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
             <div className="relative h-[32px] w-[182px]">
-                <Image src={'/Logo.svg'} alt="Logo Image" fill />
+                <Link href="/">
+                    <Image src={'/Logo.svg'} alt="Logo Image" fill />
+                </Link>
             </div>
 
             {status === 'unauthenticated' && (
@@ -34,7 +37,11 @@ const Header = () => {
 
             {status === 'authenticated' && data.user && (
                 <div className="border border-solid rounded-full p-2 px-3 border-grayLighter flex items-center gap-3 relative">
-                    <AiOutlineMenu className='cursor-pointer' size={16} onClick={handleMenuClick}/>
+                    <AiOutlineMenu
+                        className="cursor-pointer"
+                        size={16}
+                        onClick={handleMenuClick}
+                    />
                     <Image
                         className="rounded-full shadow-md"
                         src={data.user.image!}
@@ -44,7 +51,7 @@ const Header = () => {
                     />
 
                     {menuIsOpen && (
-                        <div className="absolute top-12 right-0 bg-background shadow-lg rounded-lg p-4">
+                        <div className="absolute top-12 bg-white right-0 shadow-lg rounded-lg p-4 z-50">
                             <button
                                 onClick={handleLogoutClick}
                                 className="text-primary text-sm font-semibold"
