@@ -7,8 +7,8 @@ interface TripHighlightsProps {
 
 const tripHighlights = ({ highlights }: TripHighlightsProps) => {
     return (
-        <div className="flex flex-col p-5">
-            <h1 className="font-semibold text-primaryDarker mb-2">Destaques</h1>
+        <div className="flex flex-col p-5 gap-y-3">
+            <h1 className="font-semibold text-primaryDarker mb-2 ">Destaques</h1>
             
             <div className='flex flex-wrap gap-y-3'>
                 {highlights.map((highlight, index) => (
