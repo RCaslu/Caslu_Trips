@@ -28,7 +28,7 @@ const tripReservation = ({ trip }: TripReservationProps) => {
 
             <div className="flex justify-between mt-3">
                 <p className="font-medium text-sm text-primaryDarker">
-                    Total:{' '}
+                    Total:
                 </p>
                 <p className="font-medium text-sm text-primaryDarker">
                     R$ 2500
