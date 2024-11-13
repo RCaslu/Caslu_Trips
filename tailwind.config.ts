@@ -18,6 +18,7 @@ const config: Config = {
             primaryLighter: 'DDD5EA',
             grayPrimary: '#717171',
             grayLighter: '#BBBFBF',
+            white: '#FFFFFF',
         },
         textColor: {
             dark: '#717171',
