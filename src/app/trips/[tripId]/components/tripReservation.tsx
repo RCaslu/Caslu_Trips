@@ -14,20 +14,26 @@ interface TripReservationForm {
 }
 
 interface TripReservationProps {
-    trip: Trip;
+    tripStartDate: Date;
+    tripEndDate: Date;
+    maxGuests: number;
 }
 
-const tripReservation = ({ trip }: TripReservationProps) => {
+const tripReservation = ({ maxGuests, tripEndDate, tripStartDate }: TripReservationProps) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
         control,
+        watch,
     } = useForm<TripReservationForm>();
 
     const onSubmit = (data: any) => {
         console.log({ data });
     };
+
+    const startDate = watch('startDate'); 
+
     return (
         <div className="flex flex-col px-5">
             <div className="flex gap-4">
@@ -48,6 +54,7 @@ const tripReservation = ({ trip }: TripReservationProps) => {
                             selected={field.value}  
                             error={!!errors?.startDate}
                             errorMessage={errors?.startDate?.message}
+                            minDate={tripStartDate}
                         />
                     )}
                 />
@@ -68,6 +75,8 @@ const tripReservation = ({ trip }: TripReservationProps) => {
                             selected={field.value}  
                             error={!!errors?.endDate}
                             errorMessage={errors?.endDate?.message}
+                            maxDate={tripEndDate}
+                            minDate={startDate ?? tripStartDate}
                         />
                     )}
                 />
@@ -82,7 +91,7 @@ const tripReservation = ({ trip }: TripReservationProps) => {
                 })}
                 error={!!errors?.guests}
                 errorMessage={errors?.guests?.message}
-                placeholder={`Número de hóspedes (max: ${trip.maxGuests})`}
+                placeholder={`Número de hóspedes (max: ${maxGuests})`}
                 className="mt-4 w-full"
             />
 
