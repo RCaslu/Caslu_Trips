@@ -6,11 +6,13 @@ import Input from '@/components/Input';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { differenceInDays } from 'date-fns';
+import { json } from 'stream/consumers';
 
 interface TripReservationForm {
     guests: number;
     startDate: Date | null;
     endDate: Date | null;
+    tripId: string;
 }
 
 interface TripReservationProps {
@@ -18,22 +20,56 @@ interface TripReservationProps {
     tripEndDate: Date;
     maxGuests: number;
     pricePerDay: number;
+    tripId: string;
 }
 
-const tripReservation = ({ maxGuests, tripEndDate, tripStartDate, pricePerDay }: TripReservationProps) => {
+const tripReservation = ({
+    tripId,
+    maxGuests,
+    tripEndDate,
+    tripStartDate,
+    pricePerDay,
+}: TripReservationProps) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
         control,
         watch,
+        setError,
     } = useForm<TripReservationForm>();
 
-    const onSubmit = (data: any) => {
-        console.log({ data });
+    const onSubmit = async (data: TripReservationForm) => {
+        console.log(data);
+        const response = await fetch('http://localhost:3000/api/trips/check', {
+            method: 'POST',
+            body: Buffer.from(
+                JSON.stringify({
+                    startDate: data.startDate,
+                    endDate: data.endDate,
+                    tripId,
+                }),
+            ),
+        });
+
+        const res = await response.json();
+
+        if (res?.error?.code === 'TRIP_ALREADY_RESERVED') {
+            setError('startDate', {
+                type: 'manual',
+                message: 'Data de início já reservada',
+            });
+
+            setError('endDate', {
+                type: 'manual',
+                message: 'Data final já reservada',
+            });
+        }
+
+        console.log(res);
     };
 
-    const startDate = watch('startDate'); 
+    const startDate = watch('startDate');
     const endDate = watch('endDate');
 
     return (
@@ -53,7 +89,7 @@ const tripReservation = ({ maxGuests, tripEndDate, tripStartDate, pricePerDay }:
                             placeholderText="Data de Início"
                             className="w-full"
                             onChange={field.onChange}
-                            selected={field.value}  
+                            selected={field.value}
                             error={!!errors?.startDate}
                             errorMessage={errors?.startDate?.message}
                             minDate={tripStartDate}
@@ -74,7 +110,7 @@ const tripReservation = ({ maxGuests, tripEndDate, tripStartDate, pricePerDay }:
                             placeholderText="Data Final"
                             className="w-full"
                             onChange={field.onChange}
-                            selected={field.value}  
+                            selected={field.value}
                             error={!!errors?.endDate}
                             errorMessage={errors?.endDate?.message}
                             maxDate={tripEndDate}
@@ -88,19 +124,27 @@ const tripReservation = ({ maxGuests, tripEndDate, tripStartDate, pricePerDay }:
                 {...register('guests', {
                     required: {
                         value: true,
-                        message: 'Número de hóspedes é obrigatório',
+                        message: 'Número de hóspedes é obrigatório.',
+                    },
+                    max: {
+                        value: maxGuests,
+                        message: `Número de hóspedes não pode ser maior que ${maxGuests}.`,
                     },
                 })}
+                placeholder={`Número de hóspedes (max: ${maxGuests})`}
+                className="mt-4"
                 error={!!errors?.guests}
                 errorMessage={errors?.guests?.message}
-                placeholder={`Número de hóspedes (max: ${maxGuests})`}
-                className="mt-4 w-full"
+                type="number"
             />
 
             <div className="flex justify-between mt-3">
                 <p className="font-medium text-sm text-primaryDarker">Total:</p>
                 <p className="font-medium text-sm text-primaryDarker">
-                {startDate && endDate ? `R$${differenceInDays(endDate, startDate) * pricePerDay}` ?? 1 : "R$0"}
+                    {startDate && endDate
+                        ? (`R$${differenceInDays(endDate, startDate) * pricePerDay}` ??
+                          1)
+                        : 'R$0'}
                 </p>
             </div>
 
