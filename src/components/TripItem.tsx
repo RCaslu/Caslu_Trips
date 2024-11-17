@@ -12,7 +12,7 @@ const TripItem = ({ trip }: TripItemProps) => {
     return (
         <Link href={`/trips/${trip.id}`}>
             <div className="flex flex-col gap-1">
-                <div className="relative h-[280px] w-[280px]">
+                <div className="relative h-[280px] w-[428px]">
                     <Image
                         src={trip.coverImage}
                         fill
