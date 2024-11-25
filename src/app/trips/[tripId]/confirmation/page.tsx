@@ -30,6 +30,13 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
                     }),
                 },
             );
+
+            const res = await response.json();
+
+            if (res?.error) {
+                return router.push("/");
+            }
+
             const { trip, totalPrice } = await response.json();
             setTrip(trip);
             setTotalPrice(totalPrice);
