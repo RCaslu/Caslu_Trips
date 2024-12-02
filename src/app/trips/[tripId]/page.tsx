@@ -5,7 +5,6 @@ import TripReservation from './components/tripReservation';
 import TripDescription from './components/tripDescription';
 import TripHighlights from './components/tripHighlights';
 import TripLocation from './components/tripLocation';
-import { tr } from 'date-fns/locale';
 
 const getTripDetails = async (tripId: string) => {
     const trip = await prisma.trip.findUnique({
