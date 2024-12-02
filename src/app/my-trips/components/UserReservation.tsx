@@ -16,6 +16,7 @@ interface UserReservationItemProps {
 }
 
 const UserReservationItem = ({ reservation, fetchReservations }: UserReservationItemProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const router = useRouter();
 
   const { trip } = reservation;

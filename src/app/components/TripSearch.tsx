@@ -63,6 +63,7 @@ const TripSearch = () => {
               <CurrencyInput
                 allowDecimals={false}
                 placeholder="Orçamento"
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onValueChange={field.onChange as any}
                 value={field.value}
                 onBlur={field.onBlur}

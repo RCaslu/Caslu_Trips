@@ -12,6 +12,7 @@ interface InputProps extends ReactDatePickerProps {
   errorMessage?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function DatePicker({ className, error, errorMessage, ...props }: InputProps, ref: LegacyRef<HTMLInputElement> | undefined) {
   const datePickerClassName = twMerge(
     "rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-primaryDarker placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary",

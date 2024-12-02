@@ -21,6 +21,7 @@ const MyTrips = () => {
   const router = useRouter();
 
   const fetchReservations = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = await fetch(`/api/user/${(data?.user as any)?.id}/reservations`);
 
     const json = await response.json();

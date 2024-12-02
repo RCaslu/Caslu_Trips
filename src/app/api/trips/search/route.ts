@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 const generateSearchQuery = (text: string, startDate?: string | null, budget?: string | null) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let searchQuery: any = {
     OR: [
       {

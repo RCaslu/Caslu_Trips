@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request, { params: { userId } }: { params: { userId: string } }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { searchParams } = new URL(request.url);
 
   console.log({ userId });

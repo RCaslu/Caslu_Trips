@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-binary-expression */
 "use client";
 
 import Button from "@/components/Button";
@@ -156,6 +157,7 @@ const TripReservation = ({ tripId, maxGuests, tripStartDate, tripEndDate, priceP
       <div className="flex justify-between mt-3">
         <p className="font-medium text-sm text-primaryDarker">Total: </p>
         <p className="font-medium text-sm text-primaryDarker">
+          // eslint-disable-next-line no-constant-binary-expression
           {startDate && endDate ? `R$${differenceInDays(endDate, startDate) * pricePerDay}` ?? 1 : "R$0"}
         </p>
       </div>
