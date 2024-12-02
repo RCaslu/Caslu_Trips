@@ -18,7 +18,7 @@ const Header = () => {
     ];
 
     const handleMyTripsClick = () => {
-
+        setMenuIsOpen(false)
     }
 
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
@@ -58,7 +58,8 @@ const Header = () => {
                         <div className="absolute top-12 bg-white right-0 shadow-lg rounded-lg p-4 z-50">
                             <Link href="/my-trips">
                             <button
-                                className="text-primary mb-2 text-sm font-semibold"
+                                onClick={handleMyTripsClick}
+                                className="text-primary pb-2 border-b border-grayLighter border-solid text-sm font-semibold"
                             >
                                 Minhas Viagens
                             </button>
@@ -66,7 +67,7 @@ const Header = () => {
 
                             <button
                                 onClick={handleLogoutClick}
-                                className="text-primary text-sm font-semibold"
+                                className="text-primary text-sm mt-3 font-semibold"
                             >
                                 Logout
                             </button>
