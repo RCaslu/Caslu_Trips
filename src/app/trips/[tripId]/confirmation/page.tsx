@@ -56,34 +56,32 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
   if (!trip) return null;
 
   const handleBuyClick = async () => {
-    const res = await fetch("/api/payment", {
-      method: "POST",
-      body: Buffer.from(
-        JSON.stringify({
-          tripId: params.tripId,
-          startDate: searchParams.get("startDate"),
-          endDate: searchParams.get("endDate"),
-          guests: Number(searchParams.get("guests")),
-          totalPrice,
-          coverImage: trip.coverImage,
-          name: trip.name,
-          description: trip.description,
-        })
-      ),
+    const res = await fetch('/api/trips/reservation', {
+        method: 'POST',
+        body: Buffer.from(
+            JSON.stringify({
+                tripId: params.tripId,
+                startDate: searchParams.get('startDate'),
+                endDate: searchParams.get('endDate'),
+                guests: Number(searchParams.get('guests')),
+                userId: (data?.user as any).id!,
+                totalPaid: totalPrice,
+            }),
+        ),
     });
 
     if (!res.ok) {
-      return toast.error("Ocorreu um erro ao realizar a reserva!", { position: "bottom-center" });
+        return toast.error('Ocorreu um erro ao realizar a reserva!', {
+            position: 'bottom-center',
+        });
     }
+    
+    router.push("/")
 
-    const { sessionId } = await res.json();
-
-    const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY as string);
-
-    await stripe?.redirectToCheckout({ sessionId });
-
-    toast.success("Reserva realizada com sucesso!", { position: "bottom-center" });
-  };
+    toast.success('Reserva realizada com sucesso!', {
+        position: 'bottom-center',
+    });
+};
 
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
