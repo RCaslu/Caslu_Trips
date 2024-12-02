@@ -27,6 +27,7 @@ const TripDetails = async ({ params }: { params: { tripId: string } }) => {
             <TripHeader trip={trip} />
 
             {/* RESERVA */}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             <TripReservation tripId={trip.id} pricePerDay={trip.pricePerDay as any} tripStartDate={trip.startDate} tripEndDate={trip.endDate} maxGuests={trip.maxGuests}/>
 
             <TripDescription description={trip.description} />

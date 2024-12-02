@@ -62,6 +62,7 @@ const TripConfirmation = ({ params }: { params: { tripId: string } }) => {
                     startDate: searchParams.get('startDate'),
                     endDate: searchParams.get('endDate'),
                     guests: Number(searchParams.get('guests')),
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     userId: (data?.user as any).id!,
                     totalPaid: totalPrice,
                 }),
