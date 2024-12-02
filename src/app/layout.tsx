@@ -8,8 +8,8 @@ import ToastProvider from "@/providers/toast";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
 
 export const metadata = {
-  title: "FSW Trips",
-  description: "Sistema de Reserva de Viagens TOP!",
+  title: "CasluTrips",
+  description: "Encontre já seu destino!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
