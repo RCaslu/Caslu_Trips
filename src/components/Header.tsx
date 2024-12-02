@@ -17,6 +17,10 @@ const Header = () => {
         signOut().then(() => setMenuIsOpen(false)),
     ];
 
+    const handleMyTripsClick = () => {
+
+    }
+
     const handleMenuClick = () => setMenuIsOpen(!menuIsOpen);
     return (
         <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center">
@@ -52,6 +56,14 @@ const Header = () => {
 
                     {menuIsOpen && (
                         <div className="absolute top-12 bg-white right-0 shadow-lg rounded-lg p-4 z-50">
+                            <Link href="/my-trips">
+                            <button
+                                className="text-primary mb-2 text-sm font-semibold"
+                            >
+                                Minhas Viagens
+                            </button>
+                            </Link>
+
                             <button
                                 onClick={handleLogoutClick}
                                 className="text-primary text-sm font-semibold"

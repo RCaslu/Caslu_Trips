@@ -12,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-    title: 'SkyCode Trips',
+    title: 'CasluTrips',
     description: 'Sistema de reserva de viagens',
 };
 
